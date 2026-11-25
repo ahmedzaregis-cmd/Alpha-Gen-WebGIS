@@ -1,11 +1,9 @@
 # منصة روضات جيل ألفا — Alpha GIS Platform 🗺️
 
 منصة ويب لـ **عرض** و**تحرير** و**تحليل** طبقات وبيانات مشروع روضات جيل ألفا —
-بنفس عناوين وألوان خرائط QGIS الأصلية وبنفس التحليلات الستة، مع أدوات إضافية.
 
 A browser-based GIS platform to **show, edit and analyse** the layers and data of the
-Alpha Generation KG-schools project — identical titles, colours and the six original
-QGIS analyses, plus extra tools.
+Alpha Generation KG-schools project —
 
 ---
 
