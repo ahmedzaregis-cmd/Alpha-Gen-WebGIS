@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<title>منصة روضات جيل ألفا | Alpha GIS Platform</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312355B'/%3E%3Cpath d='M16 26s7.5-6.4 7.5-12.2a7.5 7.5 0 0 0-15 0C8.5 19.6 16 26 16 26Z' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='13.6' r='2.6' fill='%23C8811A'/%3E%3C/svg%3E">
+<link rel="preload" href="/api/catalog" as="fetch" crossorigin>
+<link rel="stylesheet" href="/static/vendor/leaflet.css">
+<link rel="stylesheet" href="/static/style.css?v=6">
+</head>
+<body>
+<!-- ============ أيقونات (مجموعة واحدة بسُمك خط واحد) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5a7 7 0 0 0-14 0C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12.5 9 5 9-5"/><path d="m3 17 9 5 9-5"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 3v6.2a2 2 0 0 1-.2.9L4.7 20.3a1 1 0 0 0 .9 1.4h12.8a1 1 0 0 0 .9-1.4l-5.1-10.2a2 2 0 0 1-.2-.9V3"/><path d="M8.5 3h7M7.5 15.5h9"/></symbol>
+    <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="10" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="6" rx="1.5"/><rect x="13.5" y="12" width="7.5" height="9" rx="1.5"/><rect x="3" y="16" width="7.5" height="5" rx="1.5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7.5 18.5 3 20l1.5-4.5Z"/><path d="m14.5 5.5 3 3"/></symbol>
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.4-2.7 4"/><path d="M12 17.3h.01"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-focus" viewBox="0 0 24 24"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-opacity" viewBox="0 0 24 24"><path d="M12 3.5S5.5 10 5.5 14.2a6.5 6.5 0 0 0 13 0C18.5 10 12 3.5 12 3.5Z"/></symbol>
+    <symbol id="i-front" viewBox="0 0 24 24"><path d="m6 10 6-6 6 6M12 4v13M5 21h14"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.7-3.7"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="m3.5 17.5 14-14a1.4 1.4 0 0 1 2 0l1 1a1.4 1.4 0 0 1 0 2l-14 14a1.4 1.4 0 0 1-2 0l-1-1a1.4 1.4 0 0 1 0-2Z"/><path d="m8 8 2 2M11 5l2 2M5 11l2 2M14 11l2 2"/></symbol>
+    <symbol id="i-area" viewBox="0 0 24 24"><path d="M12 3 21 9.5 17.6 20H6.4L3 9.5Z"/></symbol>
+    <symbol id="i-buffer" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.7h.01"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8.5 19H16a3.5 3.5 0 0 0 0-7H8a3.5 3.5 0 0 1 0-7h7.5"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c.5 3 3.5 4.5 5 7.2A6.5 6.5 0 0 1 5.5 14c0-2 1-3.2 2-4.2.2 1.2.9 2 1.8 2.2C9 9 9.5 5.5 12 3Z"/></symbol>
+    <symbol id="i-scatter" viewBox="0 0 24 24"><circle cx="6.5" cy="16.5" r="2"/><circle cx="10" cy="7" r="2"/><circle cx="17.5" cy="12" r="2"/><circle cx="18" cy="19" r="1.5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.5"/></symbol>
+    <symbol id="i-overlap" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></symbol>
+    <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2 14c2-8 4.5-8 6.5-2s4.5 6 6.5-2c1-3 2.5-4 5-4"/></symbol>
+    <symbol id="i-eraser" viewBox="0 0 24 24"><path d="M9 19 20 8a2 2 0 0 0 0-2.8l-1.2-1.2a2 2 0 0 0-2.8 0L4.5 15.5a2 2 0 0 0 0 2.8L6.2 20H20"/><path d="m8 10 6 6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.8 19.5h18.4Z"/><path d="M12 10v4.5M12 17.3h.01"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.6 5.6a9 9 0 0 1 1.4-.1c6 0 9.5 6.5 9.5 6.5a15.6 15.6 0 0 1-3.1 3.9M6.6 7.1A15.4 15.4 0 0 0 2.5 12S6 18.5 12 18.5c1.6 0 3-.4 4.3-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/><path d="m3.5 3.5 17 17"/></symbol>
+    <symbol id="i-school" viewBox="0 0 24 24"><path d="m12 4 10 5-10 5L2 9l10-5Z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  </defs>
+</svg>
+
+<div id="progress" role="progressbar" aria-label="Loading" hidden></div>
+
+<!-- ============================ HEADER ============================ -->
+<header id="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><svg class="ic"><use href="#i-pin"/></svg></span>
+    <div class="brand-titles">
+      <strong data-i18n="app_title">منصة روضات جيل ألفا</strong>
+      <small data-i18n="app_sub">عرض · تحرير · تحليل الطبقات والبيانات</small>
+    </div>
+  </div>
+
+  <div class="top-controls">
+    <div class="seg" id="citySeg" role="group" aria-label="City">
+      <button data-city="nasr" class="active" aria-pressed="true">مدينة نصر</button>
+      <button data-city="ps" aria-pressed="false">بورسعيد</button>
+    </div>
+    <button id="btnNames" class="switch-btn" type="button" role="switch" aria-checked="false" title="إظهار أسماء المدارس">
+      <svg class="ic"><use href="#i-eye-off"/></svg>
+      <span class="sw-label" data-i18n="names_btn">أسماء المدارس</span>
+      <i class="sw" aria-hidden="true"></i>
+    </button>
+    <select id="basemapSel" aria-label="Basemap">
+      <option value="osm" data-i18n="bm_osm">الشوارع</option>
+      <option value="sat" data-i18n="bm_sat">قمر صناعي</option>
+      <option value="topo" data-i18n="bm_topo">تضاريس</option>
+      <option value="none" data-i18n="basemap_none">بدون خريطة أساسية</option>
+    </select>
+    <div class="seg" id="langSeg" role="group" aria-label="Language">
+      <button data-lang="ar" class="active" aria-pressed="true">ع</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <button id="btnPrint" class="icon-btn" aria-label="Print" title="Print / PDF"><svg class="ic"><use href="#i-print"/></svg></button>
+    <button id="btnHelp" class="icon-btn" aria-label="Help" title="Help"><svg class="ic"><use href="#i-help"/></svg></button>
+  </div>
+</header>
+
+<!-- ============================ BODY ============================ -->
+<div id="main">
+  <nav id="tabs" role="tablist" aria-orientation="vertical">
+    <button role="tab" id="tab-layers" aria-controls="page-layers" data-tab="layers" class="active" aria-selected="true"><svg class="ic"><use href="#i-layers"/></svg><em data-i18n="tab_layers">الطبقات</em></button>
+    <button role="tab" id="tab-maps" aria-controls="page-maps" data-tab="maps" aria-selected="false"><svg class="ic"><use href="#i-map"/></svg><em data-i18n="tab_maps">الخرائط</em></button>
+    <button role="tab" id="tab-analysis" aria-controls="page-analysis" data-tab="analysis" aria-selected="false"><svg class="ic"><use href="#i-flask"/></svg><em data-i18n="tab_analysis">التحليل</em></button>
+    <button role="tab" id="tab-table" aria-controls="page-table" data-tab="table" aria-selected="false"><svg class="ic"><use href="#i-table"/></svg><em data-i18n="tab_table">الجدول</em></button>
+    <button role="tab" id="tab-dash" aria-controls="page-dash" data-tab="dash" aria-selected="false"><svg class="ic"><use href="#i-dash"/></svg><em data-i18n="tab_dash">المؤشرات</em></button>
+    <button role="tab" id="tab-edit" aria-controls="page-edit" data-tab="edit" aria-selected="false"><svg class="ic"><use href="#i-edit"/></svg><em data-i18n="tab_edit">التحرير</em></button>
+  </nav>
+
+  <aside id="panel">
+    <!-- ===== LAYERS ===== -->
+    <section class="tab-page active" id="page-layers" role="tabpanel" aria-labelledby="tab-layers" data-page="layers">
+      <div class="pane-head">
+        <h2 data-i18n="layers_h">الطبقات</h2>
+        <div class="pane-actions">
+          <button id="lyrAllOn" data-i18n="all_on">إظهار الأساسية</button>
+          <button id="lyrAllOff" data-i18n="all_off">إخفاء الكل</button>
+        </div>
+      </div>
+      <div class="field-search">
+        <svg class="ic"><use href="#i-search"/></svg>
+        <input id="lyrFilter" type="search" data-i18n-ph="filter_layers" placeholder="ابحث عن طبقة…" autocomplete="off">
+      </div>
+      <div id="layerTree"></div>
+    </section>
+
+    <!-- ===== MAPS ===== -->
+    <section class="tab-page" id="page-maps" role="tabpanel" aria-labelledby="tab-maps" data-page="maps">
+      <div class="pane-head"><h2 data-i18n="maps_h">الخرائط الأصلية</h2></div>
+      <p class="hint" data-i18n="maps_hint">اختر خريطة لتُعرض بعنوانها وألوانها وطبقاتها كما في QGIS.</p>
+      <div id="mapList" class="card-list"></div>
+      <div class="pane-head sub"><h3 data-i18n="maps_extra_h">خرائط إضافية</h3></div>
+      <div id="mapListExtra" class="card-list"></div>
+    </section>
+
+    <!-- ===== ANALYSIS ===== -->
+    <section class="tab-page" id="page-analysis" role="tabpanel" aria-labelledby="tab-analysis" data-page="analysis">
+      <div class="pane-head"><h2 data-i18n="an_h">التحليل</h2></div>
+      <p class="hint" data-i18n="an_intro">اختر المسافة التي يمكن للطفل قطعها مشيًا، ثم شغّل التحليل الذي تحتاجه.</p>
+
+      <div class="ctl-row">
+        <div class="ctl-label"><label data-i18n="an_threshold">مسافة المشي (متر)</label><span id="thWalk" class="walk"></span></div>
+        <div class="seg small light" id="thSeg" role="group">
+          <button data-th="400" aria-pressed="false">400</button>
+          <button data-th="800" class="active" aria-pressed="true">800</button>
+          <button data-th="1200" aria-pressed="false">1200</button>
+          <button data-th="custom" data-i18n="custom" aria-pressed="false">مخصصة</button>
+        </div>
+        <input id="thCustom" type="number" min="50" max="5000" step="50" value="1000" hidden aria-label="Custom threshold (m)">
+      </div>
+
+      <div class="an-grid">
+        <button class="an-btn" id="anService"><svg class="ic"><use href="#i-target"/></svg><span data-i18n="an_service">نطاقات الخدمة</span></button>
+        <button class="an-btn" id="anCoverage"><svg class="ic"><use href="#i-percent"/></svg><span data-i18n="an_coverage">التغطية</span></button>
+        <button class="an-btn" id="anOverlap"><svg class="ic"><use href="#i-overlap"/></svg><span data-i18n="an_overlap">تداخل النطاقات</span></button>
+        <button class="an-btn" id="anHotspot"><svg class="ic"><use href="#i-flame"/></svg><span data-i18n="an_hotspot">النقاط الساخنة Gi*</span></button>
+        <button class="an-btn" id="anDist"><svg class="ic"><use href="#i-scatter"/></svg><span data-i18n="an_dist">التوزيع المكاني</span></button>
+        <button class="an-btn" id="anKde"><svg class="ic"><use href="#i-wave"/></svg><span data-i18n="an_kde">كثافة KDE</span></button>
+        <button class="an-btn wide" id="anNearest"><svg class="ic"><use href="#i-route"/></svg><span data-i18n="an_nearest">أقرب مدرسة من نقطة تختارها</span></button>
+      </div>
+      <button class="link-btn" id="anClear"><svg class="ic"><use href="#i-eraser"/></svg><span data-i18n="an_clear">مسح النتائج</span></button>
+
+      <div id="anResult" class="result-box" hidden aria-live="polite"></div>
+
+      <div class="pane-head sub"><h3 data-i18n="tools_h">أدوات القياس</h3></div>
+      <div class="an-grid">
+        <button class="an-btn" id="toolMeasure"><svg class="ic"><use href="#i-ruler"/></svg><span data-i18n="tool_measure">قياس مسافة</span></button>
+        <button class="an-btn" id="toolArea"><svg class="ic"><use href="#i-area"/></svg><span data-i18n="tool_area">قياس مساحة</span></button>
+        <button class="an-btn" id="toolBuffer"><svg class="ic"><use href="#i-buffer"/></svg><span data-i18n="tool_buffer">بفر حول نقطة</span></button>
+        <button class="an-btn" id="toolIdentify" aria-pressed="false"><svg class="ic"><use href="#i-info"/></svg><span data-i18n="tool_identify">استعلام بالنقر</span></button>
+      </div>
+      <div id="measureOut" class="result-box" hidden aria-live="polite"></div>
+    </section>
+
+    <!-- ===== TABLE ===== -->
+    <section class="tab-page" id="page-table" role="tabpanel" aria-labelledby="tab-table" data-page="table">
+      <div class="pane-head"><h2 data-i18n="tbl_h">جدول الخصائص</h2></div>
+      <select id="tableLayerSel" aria-label="Layer"></select>
+      <div class="tbl-tools">
+        <div class="field-search grow">
+          <svg class="ic"><use href="#i-search"/></svg>
+          <input id="tblSearch" type="search" data-i18n-ph="search_rows" placeholder="بحث…" autocomplete="off">
+        </div>
+        <button id="tblCsv" class="btn-sm"><svg class="ic"><use href="#i-download"/></svg>CSV</button>
+        <button id="tblGeo" class="btn-sm"><svg class="ic"><use href="#i-download"/></svg>GeoJSON</button>
+      </div>
+      <div id="tblWrap"><table id="attrTable"><thead></thead><tbody></tbody></table></div>
+      <div id="tblEmpty" class="empty" hidden></div>
+      <div id="tblInfo" class="hint"></div>
+    </section>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="tab-page" id="page-dash" role="tabpanel" aria-labelledby="tab-dash" data-page="dash">
+      <div class="pane-head"><h2 data-i18n="dash_h">لوحة المؤشرات</h2></div>
+      <div id="kpiCards" class="kpi-grid"></div>
+      <div class="chart-box"><h3 data-i18n="dash_c1">نسبة التغطية حسب المسافة</h3><div class="cv"><canvas id="chartCoverage"></canvas></div></div>
+      <div class="chart-box"><h3 data-i18n="dash_c2">المباني والسكان: المدينتان جنبًا إلى جنب</h3><div class="cv"><canvas id="chartCities"></canvas></div></div>
+      <div class="chart-box"><h3 data-i18n="dash_c3">خلايا Gi* (تغطية 800 م)</h3><div class="cv"><canvas id="chartHotspot"></canvas></div></div>
+      <div class="chart-box"><h3 data-i18n="dash_c4">أعلى 10 شياخات بعدد المباني</h3><div class="cv tall"><canvas id="chartZones"></canvas></div><div id="zoneTable"></div></div>
+      <div class="chart-box"><h3 data-i18n="dash_c5">إحصاءات التوزيع المكاني</h3><div id="distStats"></div></div>
+    </section>
+
+    <!-- ===== EDIT ===== -->
+    <section class="tab-page" id="page-edit" role="tabpanel" aria-labelledby="tab-edit" data-page="edit">
+      <div class="pane-head"><h2 data-i18n="ed_h">تحرير البيانات</h2></div>
+      <div class="notice" data-i18n="ed_notice">التعديلات تُحفظ في نسخة جديدة <code>alpha_accessibility_edited.gpkg</code> — الملف الأصلي لا يُمَس.</div>
+      <ol class="steps">
+        <li data-i18n="ed_s1">اختر طبقة قابلة للتحرير.</li>
+        <li data-i18n="ed_s2">اضغط «إضافة» ثم انقر الخريطة لوضع معلم جديد، أو «تعديل» ثم انقر معلمًا موجودًا.</li>
+        <li data-i18n="ed_s3">«حذف» يزيل المعلم الذي تنقر عليه. كل تعديل يُحفظ فورًا.</li>
+      </ol>
+      <select id="editLayerSel" aria-label="Layer"></select>
+      <div class="edit-actions">
+        <button id="edAdd" class="primary"><svg class="ic"><use href="#i-plus"/></svg><span data-i18n="ed_add">إضافة</span></button>
+        <button id="edModify"><svg class="ic"><use href="#i-edit"/></svg><span data-i18n="ed_modify">تعديل</span></button>
+        <button id="edDelete" class="danger"><svg class="ic"><use href="#i-trash"/></svg><span data-i18n="ed_delete">حذف</span></button>
+        <button id="edCancel"><svg class="ic"><use href="#i-x"/></svg><span data-i18n="ed_cancel">إلغاء</span></button>
+      </div>
+      <div id="edStatus" class="hint" aria-live="polite"></div>
+      <div id="edForm" hidden></div>
+      <div class="pane-head sub"><h3 data-i18n="ed_log_h">سجل التعديلات</h3></div>
+      <ul id="edLog" class="log"></ul>
+      <div id="edLogEmpty" class="empty small" data-i18n="ed_log_empty">لا توجد تعديلات في هذه الجلسة بعد.</div>
+      <button id="edExport" class="btn-block"><svg class="ic"><use href="#i-download"/></svg><span data-i18n="ed_export">تصدير الطبقة المعدَّلة (GeoJSON)</span></button>
+    </section>
+  </aside>
+
+  <!-- ---------- MAP ---------- -->
+  <div id="mapWrap">
+    <div id="mapArea">
+      <div id="map"></div>
+
+      <!-- طبقة واجهة واحدة منظّمة: لا عنصر يطفو فوق آخر -->
+      <div id="hud">
+        <div class="hud-top">
+          <button id="panelToggle" class="hud-btn" aria-label="Panel"><svg class="ic"><use href="#i-menu"/></svg></button>
+          <div id="mapBanner" hidden>
+            <div class="mb-text">
+              <div class="mb-title" id="mbTitle"></div>
+              <div class="mb-sub" id="mbSub"></div>
+            </div>
+            <button id="mbClose" class="mb-close" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+          </div>
+          <div class="hud-side">
+            <div id="anBadge" hidden><span id="anBadgeText"></span><button id="anBadgeClose" aria-label="Clear"><svg class="ic"><use href="#i-x"/></svg></button></div>
+            <div id="kpiStrip" hidden></div>
+          </div>
+        </div>
+
+        <div class="hud-bottom">
+          <div id="legend" hidden>
+            <button class="lg-head" id="legendHead" aria-expanded="true">
+              <span data-i18n="legend">مفتاح الخريطة</span><svg class="ic"><use href="#i-chev"/></svg>
+            </button>
+            <div id="legendBody"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mapStatus"><span id="coords"></span><span id="scaleNote"></span></div>
+  </div>
+</div>
+
+<!-- نافذة معلم (استعلام) -->
+<dialog id="featModal">
+  <div class="modal-head"><strong id="fmTitle"></strong><button id="fmClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="fmBody"></div>
+  <div class="modal-foot" id="fmFoot"></div>
+</dialog>
+
+<!-- مساعدة -->
+<dialog id="helpModal">
+  <div class="modal-head"><strong data-i18n="help_t">عن المنصة</strong><button id="helpClose" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div id="helpBody"></div>
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script defer src="/static/vendor/leaflet.js"></script>
+<script defer src="/static/i18n.js?v=6"></script>
+<script defer src="/static/app.js?v=6"></script>
+</body>
+</html>
